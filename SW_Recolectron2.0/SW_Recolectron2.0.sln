@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SW_Recolectron2.0", "SW_Recolectron2.0\SW_Recolectron2.0.csproj", "{941EEE9A-3541-4999-9770-AAD6372EECD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{941EEE9A-3541-4999-9770-AAD6372EECD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941EEE9A-3541-4999-9770-AAD6372EECD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941EEE9A-3541-4999-9770-AAD6372EECD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941EEE9A-3541-4999-9770-AAD6372EECD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91D2FE18-7648-4051-A0B1-D282AF933303}
+	EndGlobalSection
+EndGlobal
