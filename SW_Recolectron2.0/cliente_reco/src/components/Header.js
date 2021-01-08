@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -18,10 +18,14 @@ const useStyles = makeStyles((theme) => ({
     toolbarSecondary: {
         justifyContent: 'space-between',
         overflowX: 'auto',
+        backgroundColor: '#66CC66',
     },
     toolbarLink: {
         padding: theme.spacing(1),
         flexShrink: 0,
+        color: '#000000',
+        fontFamily: 'Arial',
+        
     },
 }));
 
@@ -33,11 +37,13 @@ export default function Header(props) {
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
                 <Typography
-                    component="h2"
-                    variant="h5"
+                    component="h1"
+                    variant="h4"
                     color="inherit"
                     align="center"
+                    fontFamily='Helvetica Neue'
                     noWrap
+
                     className={classes.toolbarTitle}
                 >
                     {title}
@@ -45,16 +51,18 @@ export default function Header(props) {
             </Toolbar>
             <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                 {sections.map((section) => (
-                    <Link
-                        color="inherit"
-                        noWrap
-                        key={section.title}
-                        variant="body2"
-                        href={section.url}
-                        className={classes.toolbarLink}
-                    >
-                        {section.title}
-                    </Link>
+                    <Router>
+                        <Link
+                            color="inherit"
+                            noWrap
+                            key={section.title}
+                            variant="body2"
+                            to={classes.toolbarLink}
+                            className={classes.toolbarLink}
+                        >
+                            {section.title}
+                        </Link>
+                    </Router>
                 ))}
             </Toolbar>
         </React.Fragment>

@@ -1,8 +1,16 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import Blog from './pages/InicioReco'
+import InicioReco from './pages/InicioReco'
+import { BrowserRouter } from 'react-router-dom';
 
-const container = document.getElementById('root');
+//const container = document.getElementById('root');
 
-ReactDom.render(<Blog/>, container)
+ReactDom.render((
+    <BrowserRouter>
+        <InicioReco />
+    </BrowserRouter>
+), document.getElementById('root'));
+
+
+//ReactDom.render(<InicioReco />, container)
 
