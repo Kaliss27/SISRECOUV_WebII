@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace SW_Recolectron2._0.Models
 {
     public partial class recobd_v3Context : DbContext
     {
-        public recobd_v3Context()
+        private readonly string connectionString;
+
+        public recobd_v3Context(string connectString)
         {
+            connectionString = connectString;
         }
 
         public recobd_v3Context(DbContextOptions<recobd_v3Context> options)
@@ -46,9 +51,9 @@ namespace SW_Recolectron2._0.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=localhost;database=recobd_v3;user=root;password=19021998", x => x.ServerVersion("8.0.22-mysql"));
+                optionsBuilder.UseMySql(connectionString, x => x.ServerVersion("8.0.19-mysql"));
             }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

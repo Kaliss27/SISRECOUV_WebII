@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SW_Recolectron2._0.Models;
 
 namespace SW_Recolectron2._0
 {
@@ -24,7 +26,11 @@ namespace SW_Recolectron2._0
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<recobd_v3Context>(option =>
+              option.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddMemoryCache();
+       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
