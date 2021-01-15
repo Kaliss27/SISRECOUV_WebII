@@ -11,7 +11,7 @@ import Image from 'react-bootstrap/Image';
 import SelectPE from '../components/SelectPE';
 
 
-class InicioReco extends Component {
+class RegistroVisitas extends Component {
 
     render() {
         return (
@@ -77,5 +77,5 @@ class InicioReco extends Component {
         );
     }
 }
-export default InicioReco;
+export default RegistroVisitas;
 

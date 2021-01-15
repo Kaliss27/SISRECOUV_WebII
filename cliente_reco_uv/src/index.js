@@ -19,7 +19,8 @@ ReactDOM.render(
     <React.StrictMode>
         {/*<InicioReco />*/}
         {/*<RegistroVisita>*/}
-        <RegistroDR/>
+        {/*<RegistroDR/>*/}
+        <RegistroDE/>
   </React.StrictMode>,
   document.getElementById('root')
 );

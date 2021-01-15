@@ -6,13 +6,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Image from 'react-bootstrap/Image';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import SelectCA from '../components/SelectCA';
 import SelectRE from '../components/SelectRE';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class RegistroDR extends Component {
 
@@ -122,6 +122,8 @@ class RegistroDR extends Component {
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
+
+                            <Button variant="primary" type="submit"> Finalizar Registro</Button>
                         </Accordion>
                     </Col>
                 </Row>
