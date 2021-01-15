@@ -32,7 +32,7 @@ class Eventos extends Component {
                             <Form.Control type="text" />
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Example textarea</Form.Label>
+                            <Form.Label>Descripcion</Form.Label>
                             <Form.Control as="textarea" rows={3} />
                             </Form.Group>
                             <Form.Row>
