@@ -6,12 +6,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import FormTable from '../components/FormTable';
-
+import SelectCA from '../components/SelectCA';
+import SelectRE from '../components/SelectRE';
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class InicioReco extends Component {
 
@@ -70,7 +71,54 @@ class InicioReco extends Component {
                                     Agregar articulos!</Accordion.Toggle>
                                 <Accordion.Collapse eventKey="1">
                                     <Card.Body>
-                                        <FormTable/>
+                                        <Form>
+                                            <Form.Group controlId="formCat1">
+                                                <SelectCA/>
+                                            </Form.Group>
+                                            <Form.Group controlId="formRE1">
+                                                <SelectRE/>
+                                            </Form.Group>
+                                            <Form.Row>
+                                                <Form.Group as={Col} controlId="formCnt1">
+                                                    <Form.Label>Cantidad</Form.Label>
+                                                    <Form.Control type="text"></Form.Control>
+                                                </Form.Group>
+                                                <br />
+                                                <Form.Group as={Col} controlId="formPxU1">
+                                                    <Form.Label>Peso por Unidad</Form.Label>
+                                                    <Form.Control type="text"></Form.Control>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <Button variant="primary" type="submit"> Agregar</Button>
+                                                <Button variant="primary" type="submit">Borrar</Button>
+                                            </Form.Row>
+                                        </Form>
+                                        <Table striped bordered hover>
+                                            <thead>
+                                                <tr>
+                                                    <th>Articulo</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Peso</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td colSpan="2">Larry the Bird</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>

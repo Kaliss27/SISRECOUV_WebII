@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
+import SelectPE from '../components/SelectPE';
 
 
 class InicioReco extends Component {
@@ -45,13 +46,8 @@ class InicioReco extends Component {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formSPE1">
-                                    <Form.Label>Selecciona tu Programa educativo</Form.Label>
-                                    <Form.Control as="select" defaultValue="---------">
-                                        <option>1</option>
-
-                                    </Form.Control>
+                                    <SelectPE/>
                                 </Form.Group>
-
                                 <Form.Group as={Col} controlId="formVisit1">
                                     <Form.Label>Motivo de visita</Form.Label>
                                     <Form.Control as="select" defaultValue="----------">
