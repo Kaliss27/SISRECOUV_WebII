@@ -14,7 +14,7 @@ import SelectRE from '../components/SelectRE';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class InicioReco extends Component {
+class RegistroDR extends Component {
 
     render() {
         return (
@@ -129,5 +129,5 @@ class InicioReco extends Component {
         );
     }
 }
-export default InicioReco;
+export default RegistroDR;
 
