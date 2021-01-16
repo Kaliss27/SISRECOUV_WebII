@@ -24,7 +24,8 @@ ReactDOM.render(
         {/*<LoginReco/>*/}
         {/*<Eventos/>*/}
         {/*<VistaRapida/>*/}
-        <Inventario/>
+        {/*<Inventario/>*/}
+        <Actividades/>
   </React.StrictMode>,
   document.getElementById('root')
 );
