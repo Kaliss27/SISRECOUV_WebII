@@ -3,8 +3,13 @@ import Header from '../components/Header';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CardGroup from 'react-bootstrap/CardGroup';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
+import { BsFillPersonFill } from "react-icons/bs";
+import { BiWorld } from "react-icons/bi";
+import { BiDollar } from "react-icons/bi";
+import { IoMdSchool } from "react-icons/io";
+import { FiEdit } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -19,19 +24,16 @@ class VistaRapida extends Component {
                 <br></br>
                 <Row>
                     <Col md={3}>
-                        <br/><br/>
-                        <CardGroup>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This content is a little bit longer.</Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted">Last updated 3 mins ago</small>
-                                </Card.Footer>
-                            </Card></CardGroup>
+                        <br /><br />
+                        <Card style={{ width: '18rem' }}>
+                            <ListGroup variant="flush">
+                                <ListGroup.Item>Usuario <BsFillPersonFill /></ListGroup.Item>
+                                <ListGroup.Item>Impacto sustentable<BiWorld/></ListGroup.Item>
+                                <ListGroup.Item>Valor del inventario<BiDollar /></ListGroup.Item>
+                                <ListGroup.Item>Academico<IoMdSchool /></ListGroup.Item>
+                                <ListGroup.Item>Manejo del reco<FiEdit/></ListGroup.Item>
+                            </ListGroup>
+                        </Card>
                     </Col>
                 </Row>
             </Container>

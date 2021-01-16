@@ -23,9 +23,9 @@ ReactDOM.render(
         {/*<RegistroDE/>*/}
         {/*<LoginReco/>*/}
         {/*<Eventos/>*/}
-        {/*<VistaRapida/>*/}
+        <VistaRapida/>
         {/*<Inventario/>*/}
-        <Actividades/>
+        {/*<Actividades/>*/}
   </React.StrictMode>,
   document.getElementById('root')
 );
