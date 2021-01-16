@@ -6,11 +6,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import SelectCA from '../components/SelectCA';
-import SelectRE from '../components/SelectRE';
-import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -23,8 +18,7 @@ class RegistroDR extends Component {
                     <Header />
                 </Row>
                 <br></br> <br></br> <br></br>
-                <Row>
-                    
+                <Row>                   
                     <Col md={8}>
                         <label> Acceso
                         </label>

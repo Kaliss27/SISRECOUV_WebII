@@ -35,6 +35,8 @@ class Eventos extends Component {
                             <Form.Label>Descripcion</Form.Label>
                             <Form.Control as="textarea" rows={3} />
                             </Form.Group>
+                            <br />
+
                             <Form.Row>
                                 <Form.Group controlId="formDate1">
                                     <Form.Label>Fecha</Form.Label>

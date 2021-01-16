@@ -22,7 +22,9 @@ ReactDOM.render(
         {/*<RegistroDR/>*/}
         {/*<RegistroDE/>*/}
         {/*<LoginReco/>*/}
-        <Eventos/>
+        {/*<Eventos/>*/}
+        {/*<VistaRapida/>*/}
+        <Inventario/>
   </React.StrictMode>,
   document.getElementById('root')
 );
