@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
-import SelectPE from '../components/SelectPE';
 import TabsDE from '../components/TabsDE';
 import TableDE from '../components/TableDE';
 

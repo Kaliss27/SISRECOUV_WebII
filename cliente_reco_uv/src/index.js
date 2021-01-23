@@ -18,12 +18,12 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
     <React.StrictMode>
         {/*<InicioReco />*/}
-        {/*<RegistroVisita>*/}
-        {/*<RegistroDR/>*/}
+        {/* <RegistroVisita/> */}
+        <RegistroDR/>
         {/*<RegistroDE/>*/}
         {/*<LoginReco/>*/}
-        {/*<Eventos/>*/}
-        <VistaRapida/>
+        {/* <Eventos/> */}
+        {/*<VistaRapida/>*/}
         {/*<Inventario/>*/}
         {/*<Actividades/>*/}
   </React.StrictMode>,

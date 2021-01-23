@@ -45,11 +45,29 @@ namespace SW_Recolectron2._0.Controllers
 
         // POST api/<RegVisitasController>
         [HttpPost]
-        public void addVisita([FromBody] RegistroVisitas value)
+        public IActionResult addVisita([FromBody] RegistroVisitas value)
         {
-            context.Add(value);
+            bool error = false;
 
-            context.SaveChanges();
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         // PUT api/<RegVisitasController>/5

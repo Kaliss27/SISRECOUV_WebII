@@ -1,7 +1,5 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import SelectRE from '../components/SelectRE';
-import SelectCA from '../components/SelectCA';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
@@ -13,7 +11,7 @@ export default function InvFC1(props) {
                     <SelectCA />
                 </Form.Group>
                 <Form.Group controlId="formRE1">
-                    <SelectRE />
+                
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formCnt1">

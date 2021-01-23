@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SelectPE from '../components/SelectPE';
+
 
 export default function FormDE_E(props) {
     return (
@@ -28,9 +28,7 @@ export default function FormDE_E(props) {
             </Form.Group>
 
             <Form.Row>
-                <Form.Group controlId="formSPE1">
-                    <SelectPE />
-                </Form.Group>
+                
                     <Form.Group controlId="formDate1">
                         <Form.Label>Fecha</Form.Label>
                         <Form.Control type="date" />

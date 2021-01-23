@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import SelectCA from '../components/SelectCA';
 import Table from 'react-bootstrap/Table';
 
 export default function TableDE(props) {
@@ -18,7 +17,6 @@ export default function TableDE(props) {
                         <Card.Body>
                             <Form>
                                 <Form.Group controlId="formCat1">
-                                    <SelectCA/>
                                 </Form.Group>
                                 <Form.Group controlId="formCnt1">
                                     <Form.Label>Cantidad</Form.Label>

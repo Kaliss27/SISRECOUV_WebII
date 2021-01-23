@@ -52,10 +52,30 @@ namespace SW_Recolectron2._0.Controllers
 
         // POST api/<DonacionesRecController>
         [HttpPost("AddPerson")]
-        public void AddPerson([FromBody] RegistroRecepcionDonaciones value)
+        public IActionResult AddPerson([FromBody] RegistroRecepcionDonaciones value)
         {
-            context.Add(value);
-            context.SaveChanges();
+            bool error = false;
+
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         [HttpPost("RegDonacion")]

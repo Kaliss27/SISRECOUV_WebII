@@ -20,9 +20,11 @@ namespace SW_Recolectron2._0.Controllers
 
         // GET: api/<EventosController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Eventos> Get()
         {
-            return new string[] { "value1", "value2" };
+            var events = context.Eventos;
+
+            return events;
         }
 
         // GET api/<EventosController>/5
@@ -34,11 +36,29 @@ namespace SW_Recolectron2._0.Controllers
 
         // POST api/<EventosController>
         [HttpPost]
-        public void AddEvent([FromBody] Eventos value)
+        public IActionResult AddEvent([FromBody] Eventos value)
         {
-            context.Add(value);
+            bool error = false;
 
-            context.SaveChanges();
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         // PUT api/<EventosController>/5
