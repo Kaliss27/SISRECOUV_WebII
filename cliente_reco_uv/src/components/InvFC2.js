@@ -13,7 +13,6 @@ export default function InvFC2(props) {
                 </Form.Group>
                 <Form.Row>
                     <Form.Group controlId="formCat1">
-                        <SelectCA />
                     </Form.Group>
                     <br />
                     <Form.Group controlId="formPxU1">

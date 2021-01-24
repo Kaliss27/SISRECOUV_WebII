@@ -8,7 +8,6 @@ export default function InvFC1(props) {
         <React.Fragment>
             <Form>
                 <Form.Group controlId="formCat1">
-                    <SelectCA />
                 </Form.Group>
                 <Form.Group controlId="formRE1">
                 
