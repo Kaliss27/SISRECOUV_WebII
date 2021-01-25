@@ -3,9 +3,9 @@
     "",
     "\\public",
     "\\src",
-    "\\src\\components",
+    "\\src\\CSS",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\components\\Header.js",
+  "SelectedNode": "\\src\\pages\\InicioReco.js",
   "PreviewInSolutionExplorer": false
 }

@@ -14,7 +14,7 @@ class InicioReco extends Component {
                 <Row>
                     <Header/>
                 </Row>
-                <br></br>
+                <br/><br/><br/>
                 <Row>
                    <Carousel/>
                 </Row>
