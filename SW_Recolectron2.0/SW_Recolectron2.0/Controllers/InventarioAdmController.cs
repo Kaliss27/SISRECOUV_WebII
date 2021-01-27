@@ -18,6 +18,15 @@ namespace SW_Recolectron2._0.Controllers
             context = ctx;
         }
 
+        [HttpGet("{id}")]
+        public InventarioRe Get(int id)
+        {
+            InventarioRe inventario = context.InventarioRe.Where<InventarioRe>(e => e.IdArticulo == id).FirstOrDefault<InventarioRe>();
+
+            if (inventario == null) return null;
+
+            return inventario;
+        }
         // GET: api/<InventarioAdmController>
         [HttpGet]
         public IEnumerable<Inventario> getInventario()
@@ -35,36 +44,70 @@ namespace SW_Recolectron2._0.Controllers
             return estados;
         }
 
-        // GET api/<InventarioAdmController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<InventarioAdmController>
         [HttpPost("AddResiduo")]
-        public void AddResiduo([FromBody] ResiduosElectronicos value)
+        public IActionResult AddResiduo([FromBody] ResiduosElectronicos value)
         {
-            context.Add(value);
+            bool error = false;
 
-            context.SaveChanges();
+
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         [HttpPost("AddArticulo")]
-        public void AddArticulo([FromBody] InventarioRe value)
+        public IActionResult AddArticulo([FromBody] InventarioRe value)
         {
-            context.Add(value);
+            bool error = false;
 
-            context.SaveChanges();
+
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
         // PUT api/<InventarioAdmController>/5
         [HttpPut("{id}")]
-        public void editInventario(int id, [FromBody] InventarioRe value)
+        public IActionResult editInventario(int id, [FromBody] InventarioRe value)
         {
+            bool error = false;
+
             InventarioRe inventario = context.InventarioRe.Where<InventarioRe>(e => e.IdArticulo == id).FirstOrDefault<InventarioRe>();
 
-            if (inventario == null) return;
+            if (inventario == null) error=true;
 
             inventario.Articulo = value.Articulo;
             inventario.Cantidad = value.Cantidad;
@@ -73,20 +116,35 @@ namespace SW_Recolectron2._0.Controllers
             inventario.Notas = value.Notas;
 
             context.SaveChanges();
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return Ok(result);
         }
 
         // DELETE api/<InventarioAdmController>/5
         [HttpDelete("DelArticulo/{id}")]
-        public void DelArticulo(int id)
+        public IActionResult DelArticulo(int id)
         {
+            bool error = false;
+
             InventarioRe articulo = context.InventarioRe.Where<InventarioRe>(e => e.IdArticulo == id).FirstOrDefault<InventarioRe>();
 
-            if (articulo == null) return;
+            if (articulo == null) error=true;
 
             articulo.FkiEstado = 1;
 
             context.SaveChanges();
-        
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return Ok(result);
         }
     }
 }

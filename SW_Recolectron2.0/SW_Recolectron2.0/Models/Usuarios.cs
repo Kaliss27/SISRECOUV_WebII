@@ -12,6 +12,7 @@ namespace SW_Recolectron2._0.Models
         public int TipoUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string Contrasenia { get; set; }
+        public string Token { get; set; }
 
         public virtual PermisosUsuario TipoUsuarioNavigation { get; set; }
     }

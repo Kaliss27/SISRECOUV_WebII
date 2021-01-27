@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace SW_Recolectron2._0.Models
 {
@@ -53,7 +51,6 @@ namespace SW_Recolectron2._0.Models
             {
                 optionsBuilder.UseMySql(connectionString, x => x.ServerVersion("8.0.19-mysql"));
             }
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -813,6 +810,11 @@ namespace SW_Recolectron2._0.Models
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.TipoUsuario).HasColumnName("Tipo_Usuario");
+
+                entity.Property(e => e.Token)
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
                 entity.HasOne(d => d.TipoUsuarioNavigation)
                     .WithMany(p => p.Usuarios)

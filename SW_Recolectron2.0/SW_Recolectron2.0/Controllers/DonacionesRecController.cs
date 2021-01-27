@@ -18,6 +18,14 @@ namespace SW_Recolectron2._0.Controllers
             context = ctx;
         }
 
+        [HttpGet]
+        public IEnumerable<RecepcionRe> Get()
+        {
+            var listorigen = context.RecepcionRe;
+
+            return listorigen;
+        }
+
         // GET: api/<DonacionesRecController>
         [HttpGet("Origen")]
         public IEnumerable<CatalogoOrigen> getOrigen()
@@ -56,19 +64,20 @@ namespace SW_Recolectron2._0.Controllers
         {
             bool error = false;
 
-            try
-            {
-                context.Add(value);
+           
+                try
+                {
+                    context.Add(value);
 
-                context.SaveChanges();
+                    context.SaveChanges();
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.InnerException.Message);
-                error = true;
-            }
-
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                    error = true;
+                }
+            
 
             var result = new
             {
@@ -79,32 +88,38 @@ namespace SW_Recolectron2._0.Controllers
         }
 
         [HttpPost("RegDonacion")]
-        public void RegDonacion([FromBody] DonRec value)
+        public IActionResult RegDonacion([FromBody] List<DonRec> value)
         {
+            bool error = false;
+
+            value.ForEach(e =>
+            {
             using (var transaction = context.Database.BeginTransaction())
             {
                 var idrecep = context.RegistroRecepcionDonaciones.OrderByDescending(e => e.IdRecepcion).First().IdRecepcion;
 
-                RecepcionRe rere = new RecepcionRe
-                {
-                    FkRecepcion = idrecep,
-                    FkRe = value.FkRe,
-                    Cantidad = value.Cantidad,
-                    PesoXUnidad = value.PesoXUnidad
-                };
-                context.RecepcionRe.Add(rere);
-                context.SaveChanges();
 
-                var idarticulo = context.RecepcionRe.OrderByDescending(e => e.IdRcRe).First().IdRcRe;
+                
+                    RecepcionRe rere = new RecepcionRe
+                    {
+                        FkRecepcion = idrecep,
+                        FkRe = e.FkRe,
+                        Cantidad = e.Cantidad,
+                        PesoXUnidad = e.PesoXUnidad
+                    };
+                    context.RecepcionRe.Add(rere);
+                    context.SaveChanges();
 
-                InventarioSb invsb = new InventarioSb
-                {
-                    ArticuloFk = idarticulo,
-                    EstadoFk = value.EstadoFk
-                };
 
-                context.InventarioSb.Add(invsb);
+                    var idarticulo = context.RecepcionRe.OrderByDescending(i => i.IdRcRe).First().IdRcRe;
 
+                    InventarioSb invsb = new InventarioSb
+                    {
+                        ArticuloFk = idarticulo,
+                        EstadoFk = 1
+                    };
+
+                    context.InventarioSb.Add(invsb);
                 try
                 {
                     context.SaveChanges();
@@ -112,9 +127,17 @@ namespace SW_Recolectron2._0.Controllers
 
                 }catch(Exception ex)
                 {
-
-                }
+                        Console.WriteLine(ex.InnerException.Message);
+                        error = true;
+                    }
             }
+            });
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         // PUT api/<DonacionesRecController>/5
@@ -135,6 +158,6 @@ namespace SW_Recolectron2._0.Controllers
         public int FkRe { get; set; }
         public int Cantidad { get; set; }
         public float PesoXUnidad { get; set; }
-        public int EstadoFk { get; set; }
+       
     }
 }

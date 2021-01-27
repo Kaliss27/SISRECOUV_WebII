@@ -21,18 +21,26 @@ class RegistroDR extends Component {
             origens: [],
             categorias: [],
             residuos: [],
+            dr: [],
             aux: [],
             isFetched: false,
             error: null,
             Origen: '',
             Nombre: '',
             CorreoElectronico: '',
+            Telefono: '',
             FechaHora: '',
             Categoria: '',
-            Residuo: ''
-
+            Residuo: '',
+            Cantidad: '',
+            PesoxUnidad: '',
+            DonRec: [],
+            DRTemp: []
         };
+
     }
+
+
 
     AddDatos = () => {
         const data = {
@@ -57,6 +65,38 @@ class RegistroDR extends Component {
 
             }
         })
+    }
+
+    AddDonRec = () => {
+        const data = this.state.DonRec;
+
+        console.log(data);
+        axios.post('http://localhost:5001/api/donacionesrec/regdonacion', JSON.stringify(data), {
+            headers: {
+                'Accept': 'aplication/json',
+                'Content-type': 'application/json'
+            }
+        }).then(json => {
+            if (json.data.status === 'Success') {
+                alert("Data saved!");
+                this.setState({
+                    Origen: '',
+                    Nombre: '',
+                    CorreoElectronico: '',
+                    Telefono: '',
+                    FechaHora: '',
+                    Categoria: '',
+                    DonRec: [],
+                    DRTemp: []
+                })
+
+            } else {
+                alert('Data not saved!');
+
+            }
+        })
+
+        
     }
 
 
@@ -137,6 +177,31 @@ class RegistroDR extends Component {
                     );
                 }
             );
+
+        fetch("http://localhost:5001/api/donacionesrec")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(
+                        {
+                            dr: result,
+                            isFetched: true,
+                            error: null
+                        }
+
+                    );
+                    console.log(this.state);
+                },
+                (error) => {
+                    this.setState(
+                        {
+                            dr: [],
+                            isFetched: true,
+                            error: error
+                        }
+                    );
+                }
+            );
     }
 
 
@@ -169,11 +234,61 @@ class RegistroDR extends Component {
 
     }
 
+    addElement = () => {
+        let donrecs = {
+            fkRe: '',
+            cantidad: '',
+            pesoXUnidad: ''
+        }
+        let temp = {
+            idres: '',
+            res: '',
+            cant: '',
+            pxu: ''
+        }
+
+        this.state.residuos.map(i => {
+            if (i.idRe === parseInt(this.state.Residuo)) {
+                temp.res = i.descripcion;
+            }
+        })
+
+        donrecs.fkRe = parseInt(this.state.Residuo);
+        donrecs.cantidad = parseInt(this.state.Cantidad);
+        donrecs.pesoXUnidad = parseFloat(this.state.PesoxUnidad);
+        temp.idres = donrecs.fkRe;
+        temp.cant = donrecs.cantidad;
+        temp.pxu = donrecs.pesoXUnidad;
+
+        this.state.DonRec.push(donrecs);
+        this.state.DRTemp.push(temp);
+
+        this.setState({
+            Residuo: '',
+            Cantidad: '',
+            PesoxUnidad: ''
+        });
+
+        console.log(this.state.DonRec);
+        console.log(this.state.DRTemp);
+    }
+
+    eraseElement = () => {
+        this.state.DonRec.pop();
+        this.state.DRTemp.pop();
+
+        console.log(this.state.DonRec);
+        console.log(this.state.DRTemp);
+
+        this.setState({
+            Residuo: '',
+            Cantidad: '',
+            PesoxUnidad: ''
+        });
+    }
     render() {
 
-        const { origens, isFetched, error } = this.state;
-        const { categorias } = this.state;
-        const { residuos } = this.state;
+        const { origens, isFetched, error, categorias, residuos, DRTemp } = this.state;
 
         return (
             <Container>
@@ -249,7 +364,7 @@ class RegistroDR extends Component {
                                             </Form.Group>
                                             <Form.Group controlId="formRE1">
                                                 <Form.Label>Residuo Electronico</Form.Label>
-                                                <Form.Control as="select"  >
+                                                <Form.Control as="select" name="Residuo" onChange={this.handleChange} value={this.state.Residuo} >
                                                     <option value=''>Selecciona una opción</option>
                                                     {
                                                         residuos.map(e =>
@@ -261,17 +376,17 @@ class RegistroDR extends Component {
                                             <Form.Row>
                                                 <Form.Group as={Col} controlId="formCnt1">
                                                     <Form.Label>Cantidad</Form.Label>
-                                                    <Form.Control type="text"></Form.Control>
+                                                    <Form.Control type="text" name="Cantidad" onChange={this.handleChange} value={this.state.Cantidad} />
                                                 </Form.Group>
                                                 <br />
                                                 <Form.Group as={Col} controlId="formPxU1">
-                                                    <Form.Label>Peso por Unidad</Form.Label>
-                                                    <Form.Control type="text"></Form.Control>
+                                                    <Form.Label>Peso por Unidad (Kg)</Form.Label>
+                                                    <Form.Control type="text" name="PesoxUnidad" onChange={this.handleChange} value={this.state.PesoxUnidad} />
                                                 </Form.Group>
                                             </Form.Row>
                                             <Form.Row>
-                                                <Button variant="primary" type="submit"> Agregar</Button>
-                                                <Button variant="primary" type="submit">Borrar</Button>
+                                                <Button variant="primary" type="button" onClick={this.addElement}>Agregar</Button>
+                                                <Button variant="primary" type="button" onClick={this.eraseElement}>Borrar</Button>
                                             </Form.Row>
                                         </Form>
                                         <Table striped bordered hover>
@@ -283,27 +398,21 @@ class RegistroDR extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td colSpan="2">Larry the Bird</td>
-                                                </tr>
+                                                {
+                                                    DRTemp.map(i =>
+                                                        <tr key={i.idres}>
+                                                            <td>{i.res}</td>
+                                                            <td>{i.cant}</td>
+                                                            <td>{i.pxu}</td>
+                                                        </tr>)
+                                                }
                                             </tbody>
                                         </Table>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
 
-                            <Button variant="primary" type="submit"> Finalizar Registro</Button>
+                            <Button variant="primary" type="button" onClick={this.AddDonRec}> Finalizar Registro</Button>
                         </Accordion>
                     </Col>
                 </Row>

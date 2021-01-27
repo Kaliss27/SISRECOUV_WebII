@@ -39,54 +39,115 @@ namespace SW_Recolectron2._0.Controllers
 
         // POST api/<DonacionesEmiController>
         [HttpPost("AddStudent")]
-        public void AddStudent([FromBody] RegistroEmisionDonacionesEstudiantes value)
+        public IActionResult AddStudent([FromBody] RegistroEmisionDonacionesEstudiantes value)
         {
+            bool error = false;
 
-            context.Add(value);
-            context.SaveChanges();
+
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         [HttpPost("AddPublic")]
-        public void AddPublic([FromBody] RegistroEmisionDonacionesPg value)
+        public IActionResult AddPublic([FromBody] RegistroEmisionDonacionesPg value)
         {
 
-            context.Add(value);
-            context.SaveChanges();
+            bool error = false;
+
+
+            try
+            {
+                context.Add(value);
+
+                context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.Message);
+                error = true;
+            }
+
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
+            };
+
+            return new JsonResult(result);
         }
 
         [HttpPost("AddDonacionEst")]
-        public void RegDonacionEst([FromBody] RegistrodeComponentes value)
+        public IActionResult RegDonacionEst([FromBody] List<RegistrodeComponentes> value)
         {
-            var idrede = context.RegistroEmisionDonacionesEstudiantes.OrderByDescending(e => e.IdEmision).First().IdEmision;
+            bool error = false;
 
-            RegistrodeComponentes rdc = new RegistrodeComponentes
+            value.ForEach(e =>
             {
-                FkRegistroDe = idrede,
-                FkComponente = value.FkComponente,
-                Cantidad = value.Cantidad
+
+                var idrede = context.RegistroEmisionDonacionesEstudiantes.OrderByDescending(i => i.IdEmision).First().IdEmision;
+
+                RegistrodeComponentes rdc = new RegistrodeComponentes
+                {
+                    FkRegistroDe = idrede,
+                    FkComponente = e.FkComponente,
+                    Cantidad = e.Cantidad
+                };
+
+                context.RegistrodeComponentes.Add(rdc);
+                context.SaveChanges();
+            });
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
             };
-        
 
-
-            context.RegistrodeComponentes.Add(rdc);
-            context.SaveChanges();
+            return new JsonResult(result);
         }
 
         [HttpPost("AddDonacionPG")]
-        public void RegDonacionPG([FromBody] RegistrodePublicogral value)
+        public IActionResult RegDonacionPG([FromBody] List<RegistrodePublicogral> value)
         {
-            var idrednpg = context.RegistroEmisionDonacionesPg.OrderByDescending(e => e.IdDepublico).First().IdDepublico;
+            bool error = false;
 
-            RegistrodePublicogral rdpg = new RegistrodePublicogral
+            value.ForEach(e =>
             {
-                
-                 FkArticulo = value.FkArticulo,
-                 Cantidad = value.Cantidad,
-                 DeGral = idrednpg
+
+                var idrednpg = context.RegistroEmisionDonacionesPg.OrderByDescending(i => i.IdDepublico).First().IdDepublico;
+
+                RegistrodePublicogral rdpg = new RegistrodePublicogral
+                {
+
+                    FkArticulo = e.FkArticulo,
+                    Cantidad = e.Cantidad,
+                    DeGral = idrednpg
+                };
+
+                context.RegistrodePublicogral.Add(rdpg);
+                context.SaveChanges();
+            });
+            var result = new
+            {
+                Status = !error ? "Success" : "Fail"
             };
 
-            context.RegistrodePublicogral.Add(rdpg);
-            context.SaveChanges();
+            return new JsonResult(result);
         }
 
 
